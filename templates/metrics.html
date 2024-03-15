@@ -17,17 +17,17 @@ machine_online{id="{{ machine["id"] }}",machine="{{ machine["name"] }}",user="{{
 # HELP route_enabled Route enabled status.
 # TYPE route_enabled gauge
 {% for route in meta["routes"] %}
-route_enabled{id="{{ route["id"] }}",machine="{{ route["machine"]["name"] }}",user="{{ route["machine"]["user"]["name"] }}"} {{ "1" if route["enabled"] else "0" }}
+route_enabled{id="{{ route["id"] }}",machine="{{ route["machine"]["name"] }}",user="{{ route["machine"]["user"]["name"] }}",prefix="{{ route["prefix"] }}"} {{ "1" if route["enabled"] else "0" }}
 {% endfor %}
 
 # HELP route_primary Route primary status.
 # TYPE route_primary gauge
 {% for route in meta["routes"] %}
-route_primary{id="{{ route["id"] }}",machine="{{ route["machine"]["name"] }}",user="{{ route["machine"]["user"]["name"] }}"} {{ "1" if route["isPrimary"] else "0" }}
+route_primary{id="{{ route["id"] }}",machine="{{ route["machine"]["name"] }}",user="{{ route["machine"]["user"]["name"] }}",prefix="{{ route["prefix"] }}"} {{ "1" if route["isPrimary"] else "0" }}
 {% endfor %}
 
 # HELP route_advertised Route advertised status.
 # TYPE route_advertised gauge
 {% for route in meta["routes"] %}
-route_advertised{id="{{ route["id"] }}",machine="{{ route["machine"]["name"] }}",user="{{ route["machine"]["user"]["name"] }}"} {{ "1" if route["advertised"] else "0" }}
+route_advertised{id="{{ route["id"] }}",machine="{{ route["machine"]["name"] }}",user="{{ route["machine"]["user"]["name"] }}",prefix="{{ route["prefix"] }}"} {{ "1" if route["advertised"] else "0" }}
 {% endfor %}

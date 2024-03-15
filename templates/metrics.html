@@ -1,0 +1,33 @@
+# HELP user_count Number of registered users on headscale.
+# TYPE user_count gauge
+user_count {{ meta["users"] | length }}
+# HELP route_count Number of routes on headscale.
+# TYPE route_count gauge
+route_count {{ meta["routes"] | length }}
+# HELP machine_count Number of devices on headscale.
+# TYPE machine_count gauge
+machine_count {{ meta["machines"] | length }}
+
+# HELP machine_online Machine online status.
+# TYPE machine_online gauge
+{% for machine in meta["machines"] %}
+machine_online{id="{{ machine["id"] }}",machine="{{ machine["name"] }}",user="{{ machine["user"]["name"] }}"} {{ "1" if machine["online"] else "0" }}
+{% endfor %}
+
+# HELP route_enabled Route enabled status.
+# TYPE route_enabled gauge
+{% for route in meta["routes"] %}
+route_enabled{id="{{ route["id"] }}",machine="{{ route["machine"]["name"] }}",user="{{ route["machine"]["user"]["name"] }}"} {{ "1" if route["enabled"] else "0" }}
+{% endfor %}
+
+# HELP route_primary Route primary status.
+# TYPE route_primary gauge
+{% for route in meta["routes"] %}
+route_primary{id="{{ route["id"] }}",machine="{{ route["machine"]["name"] }}",user="{{ route["machine"]["user"]["name"] }}"} {{ "1" if route["isPrimary"] else "0" }}
+{% endfor %}
+
+# HELP route_advertised Route advertised status.
+# TYPE route_advertised gauge
+{% for route in meta["routes"] %}
+route_advertised{id="{{ route["id"] }}",machine="{{ route["machine"]["name"] }}",user="{{ route["machine"]["user"]["name"] }}"} {{ "1" if route["advertised"] else "0" }}
+{% endfor %}

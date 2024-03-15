@@ -26,7 +26,7 @@ headers = {
 
 
 def get_users():
-    url = f"{BASE_URL}/user"
+    url = f"{BASE_URL}user"
     response = requests.get(url, headers=headers)
     try:
         return response.json()
@@ -37,7 +37,7 @@ def get_users():
 
 
 def get_machines():
-    url = f"{BASE_URL}/machine"
+    url = f"{BASE_URL}machine"
     response = requests.get(url, headers=headers)
     try:
         return response.json()
@@ -48,7 +48,7 @@ def get_machines():
 
 
 def get_routes():
-    url = f"{BASE_URL}/routes"
+    url = f"{BASE_URL}routes"
     response = requests.get(url, headers=headers)
     try:
         return response.json()

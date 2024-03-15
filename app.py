@@ -7,7 +7,6 @@ app = Flask(__name__)
 
 @app.route('/metrics')
 def metrics():
-    print(get_all())
     return render_template('metrics.html', meta=get_all())
 
 

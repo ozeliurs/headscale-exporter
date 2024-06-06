@@ -58,7 +58,7 @@ def get_routes():
     try:
         js = response.json()
 
-        for route in js:
+        for route in js["routes"]:
             if not route.get("machine"):
                 route["machine"] = route.get("node")
 

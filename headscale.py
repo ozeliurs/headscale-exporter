@@ -39,6 +39,11 @@ def get_users():
 def get_machines():
     url = f"{BASE_URL}machine"
     response = requests.get(url, headers=headers)
+
+    if not response.ok:
+        url = f"{BASE_URL}node"
+        response = requests.get(url, headers=headers)
+
     try:
         return response.json()
     except Exception as e:

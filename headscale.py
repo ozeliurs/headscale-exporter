@@ -56,7 +56,13 @@ def get_routes():
     url = f"{BASE_URL}routes"
     response = requests.get(url, headers=headers)
     try:
-        return response.json()
+        js = response.json()
+
+        for route in js:
+            if not route.get("machine"):
+                route["machine"] = route.get("node")
+
+        return js
     except Exception as e:
         from app import app
         log.error(f"Error getting routes: {e} with response code: {response.status_code}\n{response.text}")

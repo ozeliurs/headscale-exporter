@@ -45,7 +45,12 @@ def get_machines():
         response = requests.get(url, headers=headers)
 
     try:
-        return response.json()
+        js = response.json()
+
+        if not js.get("machines"):
+            js["machines"] = js.get("nodes")
+
+        return js
     except Exception as e:
         from app import app
         log.error(f"Error getting machines: {e} with response code: {response.status_code}\n{response.text}")
